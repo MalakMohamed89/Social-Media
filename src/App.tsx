@@ -17,7 +17,7 @@ import useNetworkState from './../node_modules/react-use/esm/useNetworkState';
 import OfflineBanner from './components/OfflineBanner/OfflineBanner';
 import UserProfileProvider from './context/UserProfileContext';
 import Bookmarks from './pages/Bookmarks/Bookmarks';
-import Test from './pages/test/Test';
+
 
 function App() {
 const routes=createBrowserRouter([
@@ -25,7 +25,6 @@ const routes=createBrowserRouter([
 children :[
   {index :true, element:<ProtectedRoutes><Home /></ProtectedRoutes>},
   {path :"/home", element:<ProtectedRoutes><Home /></ProtectedRoutes>},
-    {path :"/test", element:<Test />},
   {path :"/Profile", element : <ProtectedRoutes> <Profile /></ProtectedRoutes>},
     {path :"/Profile/:id", element : <ProtectedRoutes> <Profile isUserProfile  /></ProtectedRoutes>},
     {path :"/bookmarks", element : <ProtectedRoutes> <Bookmarks /></ProtectedRoutes>},
