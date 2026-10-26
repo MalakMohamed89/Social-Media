@@ -21,7 +21,7 @@ const { ref, inView } = useInView({
   function getAllPosts(  tab: "forYou" | "following",
   page: number){
     const url = tab==="following"
-      ? "https://route-posts.routemisr.com/posts/feed?only=following&limit=10"
+      ? "https://route-posts.routemisr.com/posts/feed"
       : "https://route-posts.routemisr.com/posts"
 
     return axios.get(url,{
