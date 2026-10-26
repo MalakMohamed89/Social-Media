@@ -355,7 +355,7 @@ Deleting...
 {/* Create Comment */}
 
       {isPostDetails && (
-        <div className="sticky bottom-0 z-20 bg-white pt-3">
+        <div className="sticky bottom-0 z-10 bg-white pt-3">
           <CommentCreation postId={post._id}  queryKey={isPostDetails? ["getPostComments"] :["getAllPosts"]} />
         </div>
       )}

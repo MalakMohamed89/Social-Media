@@ -81,7 +81,7 @@ if(isFetchNextPageError){
 }
 
 return (
-  <div className="mx-auto flex w-full max-w-5xl items-start gap-6 px-4 py-6">
+<div className="mx-auto flex w-full max-w-5xl items-start justify-center gap-6 px-4 py-6">
     {/* Feed */}
     <div className="flex w-full min-w-0 max-w-2xl flex-1 flex-col gap-4">
       <PostCreation />

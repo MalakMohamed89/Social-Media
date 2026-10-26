@@ -48,9 +48,10 @@ if(isError){
           </div>
         </div>
 
-        <span className="rounded-full bg-indigo-50 px-3 py-1 text-sm font-bold text-indigo-600">
-          {bookmarksData.length} saved
-        </span>
+
+  <span className="shrink-0 whitespace-nowrap rounded-full bg-indigo-50 px-3 py-1 text-sm font-bold text-indigo-600">
+    {bookmarksData.length} saved
+  </span>
       </section>
 
 {bookmarksData.length === 0 && (
