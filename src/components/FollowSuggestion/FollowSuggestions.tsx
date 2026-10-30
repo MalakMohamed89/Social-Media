@@ -26,7 +26,7 @@ const [search,setSearch] = useState("")
     })
   }
 
-  const { data,isError,isLoading,error,fetchNextPage,hasNextPage,isFetchingNextPage,isFetchNextPageError,refetch} = useInfiniteQuery({
+  const { data,isError, isFetching,isLoading,error,fetchNextPage,hasNextPage,isFetchingNextPage,isFetchNextPageError,refetch} = useInfiniteQuery({
     queryKey: ["getFollowSuggestions"],
     queryFn:({pageParam})=> getFollowSuggestions(pageParam),
     initialPageParam:1,
@@ -36,22 +36,6 @@ const [search,setSearch] = useState("")
     }
   })
 
-useEffect(() => {
-  if (
-    inView &&
-    hasNextPage &&
-    !isFetchingNextPage &&
-    !isFetchNextPageError
-  ) {
-    fetchNextPage()
-  }
-}, [
-  inView,
-  hasNextPage,
-  isFetchingNextPage,
-  isFetchNextPageError,
-  fetchNextPage,
-])
 
 console.log(data)
   const folloSuggestionsData: FollowSuggestionType[] = data?.pages.flatMap((page)=>page.data.data.suggestions )?? []
@@ -59,6 +43,39 @@ console.log(data)
 const filteredSuggestions = folloSuggestionsData.filter((user)=>
   user.name.toLowerCase().includes(search.toLowerCase().trim())
 )
+
+
+useEffect(() => {
+  if (
+    search.trim() &&
+    filteredSuggestions.length === 0 &&
+    hasNextPage &&
+    !isFetchingNextPage &&
+    !isFetchNextPageError
+  ) {
+    fetchNextPage()
+  }
+
+  else if (
+    !search.trim() &&
+    inView &&
+    hasNextPage &&
+    !isFetchingNextPage &&
+    !isFetchNextPageError
+  ) {
+    fetchNextPage()
+  }
+
+}, [
+  search,
+  filteredSuggestions.length,
+  inView,
+  hasNextPage,
+  isFetchingNextPage,
+  isFetchNextPageError,
+  fetchNextPage
+])
+
 
   return (
     <aside className="flex w-full flex-col gap-4 rounded-2xl bg-white p-5 shadow-md">
@@ -90,7 +107,11 @@ const filteredSuggestions = folloSuggestionsData.filter((user)=>
 )}
 {!isLoading && !isError && filteredSuggestions.length === 0 && (
   <p className="py-4 text-center text-sm text-gray-400">
-    {search ? "No people found." : "No suggestions right now."}
+    {search.trim() && (isFetchingNextPage || hasNextPage)
+      ? "Searching..."
+      : search.trim()
+        ? "No people found."
+        : "No suggestions right now."}
   </p>
 )}
       {/* List */}
