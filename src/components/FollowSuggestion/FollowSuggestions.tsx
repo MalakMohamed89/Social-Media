@@ -26,7 +26,7 @@ const [search,setSearch] = useState("")
     })
   }
 
-  const { data,isError, isFetching,isLoading,error,fetchNextPage,hasNextPage,isFetchingNextPage,isFetchNextPageError,refetch} = useInfiniteQuery({
+  const { data,isError,isLoading,error,fetchNextPage,hasNextPage,isFetchingNextPage,isFetchNextPageError,refetch} = useInfiniteQuery({
     queryKey: ["getFollowSuggestions"],
     queryFn:({pageParam})=> getFollowSuggestions(pageParam),
     initialPageParam:1,
