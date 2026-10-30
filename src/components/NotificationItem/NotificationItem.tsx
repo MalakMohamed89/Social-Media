@@ -1,4 +1,4 @@
-import { FaHeart, FaComment, FaUserPlus } from "react-icons/fa6"
+import { FaHeart, FaComment, FaUserPlus, FaShare } from "react-icons/fa6"
 import type { NotificationItemType as NotificationItemType, NotificationType } from "../../Types/Notification.type"
 import { timeAgo } from "../../utils/TimeAgo";
 import axios from "axios";
@@ -10,13 +10,22 @@ const typeConfig: Record<NotificationType, { icon: React.ReactNode; bg: string; 
   like_post: { icon: <FaHeart size={10} />, bg: "bg-red-500", text: "liked your post" },
   comment_post: { icon: <FaComment size={10} />, bg: "bg-indigo-600", text: "commented on your post" },
   follow_user: { icon: <FaUserPlus size={10} />, bg: "bg-green-500", text: "started following you" },
+  share_post: {
+  icon: <FaShare size={10} />,
+  bg: "bg-indigo-500",
+  text: "shared your post"
+},
 }
 
 
 
 export default function NotificationItem({ notification }: { notification: NotificationItemType }) {
   const { actor, type, createdAt, isRead } = notification
-  const config = typeConfig[type]
+const config = typeConfig[type] ?? {
+  icon: <FaHeart size={10} />,
+  bg: "bg-gray-500",
+  text: "interacted with your post"
+}
 const [markAsRead,setMarkAsRead]=useState(isRead)
 
 function markNotificationAsRead(){
@@ -37,12 +46,6 @@ const {mutate}=useMutation({
 toast.error(err.message)
     }
 })
-
-
-
-
-
-
 
 
   return (

@@ -27,13 +27,13 @@ export interface NotificationUserEntity {
   [key: string]: unknown
 }
 
-// الإشعار اللي البوست أو اليوزر بتاعه اتمسح
+
 export interface UnavailableEntity {
   _id: string
   unavailable: true
 }
 
-export type NotificationType = "comment_post" | "follow_user" | "like_post"
+export type NotificationType = "comment_post" | "follow_user" | "like_post" | "share_post"
 
 interface NotificationBase {
   _id: string
