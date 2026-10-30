@@ -5,7 +5,6 @@ import { UserProfileContext } from '../../context/UserProfileContext';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { FaTimes } from 'react-icons/fa';
 
 export default function EditModalComment({comment,onClose,postId}:{comment:CommentType,onClose: () => void,postId:string}) {
 const [preview, setPreview] = useState(comment.image ?? "");
@@ -36,10 +35,18 @@ function handleImgPreview(e: ChangeEvent<HTMLInputElement>) {
 
 function handleUpdateComment(){
        const file = imgInput.current?.files?.[0]
+  const content = textareaInput.current?.value.trim() ?? ""
 
-if(!file&&!textareaInput.current?.value) return
-if(textareaInput.current?.value){
-    Formdata.append("content",textareaInput.current?.value)
+if(!file&&!content) return
+
+  if(content.length <= 1){
+    toast.error("Comment must be more than one character")
+    return
+  }
+
+
+if(content){
+    Formdata.append("content",content)
 }
 if(file){
        Formdata.append("image",file) 
@@ -66,12 +73,6 @@ onClose()
   }
 })
 
-function removeImage() {
-  setPreview("");
-  if (imgInput.current) {
-    imgInput.current.value = "";
-  }
-}
 
 return (
   <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
@@ -123,14 +124,6 @@ return (
       className="h-40 w-full rounded-xl object-cover"
     />
 
-      <button
-        type="button"
-         onClick={removeImage}
-        aria-label="Remove image"
-        className="absolute right-2 top-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-gray-900/70 text-white transition hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
-      >
-        <FaTimes size={14} aria-hidden="true" />
-      </button>
 
 </div>
 

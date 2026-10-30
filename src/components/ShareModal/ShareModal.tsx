@@ -46,6 +46,14 @@ onError:(err)=>{
 }
 })
 
+function handleShareClick() {
+  if (!textInput.current?.value.trim()) {
+    toast.error("Please write something before sharing");
+    return;
+  }
+
+  mutate();
+}
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
@@ -85,7 +93,7 @@ onError:(err)=>{
           <textarea
           ref={textInput}
             rows={3}
-            placeholder="Say something about this post... (optional)"
+            placeholder="Say something about this post..."
             className="w-full resize-none rounded-xl border border-gray-200 bg-gray-50 p-2.5 text-sm text-gray-800 outline-none transition focus:border-indigo-500 focus:bg-white"
           ></textarea>
 
@@ -134,7 +142,7 @@ onError:(err)=>{
           </button>
           <button
           disabled={isPending}
-          onClick={()=>mutate()}
+          onClick={()=>handleShareClick()}
             type="button"
             className="flex cursor-pointer disabled:cursor-not-allowed disabled:bg-slate-500 items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo-700"
           >

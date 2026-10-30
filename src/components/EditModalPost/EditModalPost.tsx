@@ -84,12 +84,7 @@ onClose()
   }
 })
 
-function removeImage() {
-  setIsUploaded("");
-  if (imgInput.current) {
-    imgInput.current.value = "";
-  }
-}
+
 
 
   return (
@@ -139,13 +134,7 @@ function removeImage() {
               className="h-40 w-full rounded-xl object-cover"
             />
 
-              <button
-    type="button"
-     onClick={removeImage}
-    aria-label="Remove image"
-    className="absolute right-2 top-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-gray-900/70 text-white transition hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
-  ></button>
-
+            
           </div>}
 
           {/* Change image */}

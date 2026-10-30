@@ -83,8 +83,8 @@ const {isPending,mutate}=useMutation({
 mutationFn:handleDeletePost,
 onSuccess:(res)=>{
   toast.success(res.data.message),
-  navigate("/home"),
-query.invalidateQueries({queryKey:["getAllposts"]})
+  query.invalidateQueries({queryKey:["getAllposts"]})
+  navigate("/home")
 },
 onError:(err)=>{
   toast.error(err.message)
